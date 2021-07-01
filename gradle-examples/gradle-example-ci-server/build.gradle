@@ -14,7 +14,7 @@ buildscript {
     }
     //The dependencies block represents the required plugins to be downloaded from the artifactory and adds into the project classpath.
     dependencies {
-      //  classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${sonarQubeGradleVersion}")
+        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.2.0")
         classpath("info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.5.1")
     }
 }
