@@ -13,18 +13,19 @@ buildscript {
     repositories {
 
         maven { 
-           url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
-                credentials {
-                            username = "admin"
-                            password = "Password1"
-                 }
-        }
+        url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
+            credentials {
+                        username = "admin"
+                        password = "Password1"
+             }
+    }
+
 
     }
 
     //The dependencies block represents the required plugins to be downloaded from the artifactory and adds into the project classpath.
     dependencies {
-    //classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.1.release")
     }
 }
 
@@ -32,8 +33,8 @@ buildscript {
 apply plugin: 'war'
 
 //The springboot plugin required for the spring boot application
-//apply plugin: 'org.springframework.boot'
-//apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 //The repositories block specifies the location of artifactory to download the war, java, springboot plugins and dependencies.
 
@@ -51,17 +52,17 @@ publishing{
 }
 //The dependencies block represents the application dependencies are required to compile and build the artifact.
 dependencies {
-//    compile('org.springframework.boot:spring-boot-starter-actuator')
-//    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-//    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('org.springframework.boot:spring-boot-starter-web')
 
     compile('com.fasterxml.jackson.core:jackson-annotations:2.9.6')
     compile('com.fasterxml.jackson.core:jackson-core:2.9.6')
     compile('com.fasterxml.jackson.core:jackson-databind:2.9.9')
 
-//    testCompile('org.springframework.boot:spring-boot-starter-test')
-//    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
- //   compile project(':doedemodepend')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+  //  compile project(':doedemodepend')
     testCompile('io.cucumber:cucumber-java8:4.2.6')
     testCompile('io.cucumber:cucumber-junit:4.2.6')
     testCompile('io.cucumber:cucumber-spring:4.2.6')
@@ -84,4 +85,3 @@ task bddTest(type: Test) {
 }
 test.onlyIf {project.hasProperty("integrationTests")}
 bddTest.onlyIf {project.hasProperty("integrationTests")}
-
