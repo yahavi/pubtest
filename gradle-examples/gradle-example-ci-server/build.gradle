@@ -37,6 +37,17 @@ apply plugin: 'war'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
+
+apply plugin: 'maven-publish'
+
+publishing{
+    publications{
+        mavenJava(MavenPublication){
+            from components.java
+        }
+    }
+}
+
 //The repositories block specifies the location of artifactory to download the war, java, springboot plugins and dependencies.
 
 //The dependencies block represents the application dependencies are required to compile and build the artifact.
