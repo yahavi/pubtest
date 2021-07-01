@@ -27,26 +27,18 @@ buildscript {
 
     //The dependencies block represents the required plugins to be downloaded from the artifactory and adds into the project classpath.
     dependencies {
-    classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE"
+    //classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE"
     }
 }
 
 //The war plugin creates the application artifact as war/zip package.
 apply plugin: 'war'
 //The springboot plugin required for the spring boot application
-apply plugin: 'org.springframework.boot'
+//apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 
-apply plugin: 'maven-publish'
 
-publishing{
-    publications{
-        mavenJava(MavenPublication){
-            from components.java
-        }
-    }
-}
 
 //The repositories block specifies the location of artifactory to download the war, java, springboot plugins and dependencies.
 
