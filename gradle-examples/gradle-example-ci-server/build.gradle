@@ -3,6 +3,9 @@
  * Allows configuration options common to all sub-projects/modules.
  */
 
+//test
+
+
 ext {
     ignoreBddFailures = project.hasProperty('ignoreBddFailures') ? project.getProperty('ignoreBddFailures') : 'true'
 }
@@ -12,7 +15,7 @@ buildscript {
     //The repositories block specifies the location of artifactory to download the required dependencies
     repositories {
 
-        maven { 
+    maven { 
            url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
                 credentials {
                             username = "admin"
@@ -24,26 +27,18 @@ buildscript {
 
     //The dependencies block represents the required plugins to be downloaded from the artifactory and adds into the project classpath.
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.1.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.1")
     }
 }
 
 //The war plugin creates the application artifact as war/zip package.
 apply plugin: 'war'
-
 //The springboot plugin required for the spring boot application
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 //The repositories block specifies the location of artifactory to download the war, java, springboot plugins and dependencies.
 
-publishing{
-    publications{
-        mavenWeb(MavenPublication){
-            from components.web
-        }
-    }
-}
 //The dependencies block represents the application dependencies are required to compile and build the artifact.
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
@@ -56,27 +51,8 @@ dependencies {
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-    compile project(':doedemodepend')
+   // compile project(':doedemodepend')
     testCompile('io.cucumber:cucumber-java8:4.2.6')
     testCompile('io.cucumber:cucumber-junit:4.2.6')
     testCompile('io.cucumber:cucumber-spring:4.2.6')
 }
-
-task bddTest(type: Test) {
-    testLogging.showStandardStreams = true
-    doFirst {
-        if (System.getProperty("cucumber.options") != null) {
-            System.setProperty("cucumber.options", System.getProperty("cucumber.options") //options from pipeline should only be tags
-                    + " -p html:${buildDir}/cucumber/cucumber.html -p json:${buildDir}/cucumber/cucumber.json")
-        } else {
-            System.setProperty("cucumber.options",
-                    " -p html:${buildDir}/cucumber/cucumber.html -p json:${buildDir}/cucumber/cucumber.json")
-        }
-        systemProperties System.getProperties() as Map<String, ?>
-    }
-    ignoreFailures = "${ignoreBddFailures}".toBoolean()
-    outputs.upToDateWhen { false }
-}
-test.onlyIf {project.hasProperty("integrationTests")}
-bddTest.onlyIf {project.hasProperty("integrationTests")}
-
