@@ -24,7 +24,7 @@ buildscript {
 
     //The dependencies block represents the required plugins to be downloaded from the artifactory and adds into the project classpath.
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.1")
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE"
     }
 }
 
