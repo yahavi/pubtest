@@ -74,7 +74,3 @@ subprojects {
 jar {
     enabled = true
 }
-
-war {
-    enabled=true
-}
