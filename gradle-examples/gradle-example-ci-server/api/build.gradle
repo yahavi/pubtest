@@ -61,7 +61,6 @@ dependencies {
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-    compile project(':doedemodepend')
     testCompile('io.cucumber:cucumber-java8:4.2.6')
     testCompile('io.cucumber:cucumber-junit:4.2.6')
     testCompile('io.cucumber:cucumber-spring:4.2.6')
