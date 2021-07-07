@@ -1,43 +1,46 @@
-/**
- * Top-level build file |1|
- * Allows configuration options common to all sub-projects/modules.
- */
 
-ext {
-    ignoreBddFailures = project.hasProperty('ignoreBddFailures') ? project.getProperty('ignoreBddFailures') : 'true'
-}
-
-//The buildScript block determines which plugins, task classes and other classes are available for use in the rest of the build script.
 buildscript {
     //The repositories block specifies the location of artifactory to download the required dependencies
     repositories {
 
         maven { 
            url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
-                credentials {
-                            username = "admin"
-                            password = "Password1"
-                 }
-        }
-
+            credentials {
+                        username = "admin"
+                        password = "Password1"
+             }
     }
-
+    }
     //The dependencies block represents the required plugins to be downloaded from the artifactory and adds into the project classpath.
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE")
+        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.2.0")
+        classpath("info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.5.1")
     }
 }
+allprojects  {
+    group 'test'
+    //The java plugin requiredd for the java build
+    apply plugin: 'java'
 
-//The war plugin creates the application artifact as war/zip package.
-apply plugin: 'war'
+    //The sourceCompatibility enforce that the gradle build must happen on jdk1.8
+    sourceCompatibility = 1.8
+    repositories {
 
-//The springboot plugin required for the spring boot application
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
+        maven { 
+           url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
+            credentials {
+                        username = "admin"
+                        password = "Password1"
+             }
+    }
 
-//The repositories block specifies the location of artifactory to download the war, java, springboot plugins and dependencies.
+    }
+}
+//The sponar plugin required to scan the application code and publish the report into the sonar dashboard.
+apply plugin: 'org.sonarqube'
 
 apply plugin: 'maven-publish'
+apply plugin: 'war'
 
 publishing{
     publications{
@@ -49,38 +52,19 @@ publishing{
         }
     }
 }
-//The dependencies block represents the application dependencies are required to compile and build the artifact.
-dependencies {
-    compile('org.springframework.boot:spring-boot-starter-actuator')
-    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-    compile('org.springframework.boot:spring-boot-starter-web')
 
-    compile('com.fasterxml.jackson.core:jackson-annotations:2.9.6')
-    compile('com.fasterxml.jackson.core:jackson-core:2.9.6')
-    compile('com.fasterxml.jackson.core:jackson-databind:2.9.9')
-
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-    compile project(':doedemodepend')
-    testCompile('io.cucumber:cucumber-java8:4.2.6')
-    testCompile('io.cucumber:cucumber-junit:4.2.6')
-    testCompile('io.cucumber:cucumber-spring:4.2.6')
-}
-
-task bddTest(type: Test) {
-    testLogging.showStandardStreams = true
-    doFirst {
-        if (System.getProperty("cucumber.options") != null) {
-            System.setProperty("cucumber.options", System.getProperty("cucumber.options") //options from pipeline should only be tags
-                    + " -p html:${buildDir}/cucumber/cucumber.html -p json:${buildDir}/cucumber/cucumber.json")
-        } else {
-            System.setProperty("cucumber.options",
-                    " -p html:${buildDir}/cucumber/cucumber.html -p json:${buildDir}/cucumber/cucumber.json")
-        }
-        systemProperties System.getProperties() as Map<String, ?>
+subprojects {
+    apply plugin: 'info.solidsoft.pitest'
+    pitest {
+        historyInputLocation = "./pithashfile.txt"
+        historyOutputLocation = "./pithashfile.txt"
+        //reportDir = "./target/pit-reports"
+        threads = 4
+        outputFormats = ['XML', 'HTML']
+        timestampedReports = false
     }
-    ignoreFailures = "${ignoreBddFailures}".toBoolean()
-    outputs.upToDateWhen { false }
 }
-test.onlyIf {project.hasProperty("integrationTests")}
-bddTest.onlyIf {project.hasProperty("integrationTests")}
+
+jar {
+    enabled = true
+}
