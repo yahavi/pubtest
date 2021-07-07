@@ -4,7 +4,7 @@ buildscript {
     repositories {
 
         maven { 
-        url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
+           url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
             credentials {
                         username = "admin"
                         password = "Password1"
@@ -19,17 +19,16 @@ buildscript {
     }
 }
 allprojects  {
-    group 'test'
+    group 'comtest'
     //The java plugin requiredd for the java build
     apply plugin: 'java'
-    //The fortify plugin required to scan security vulnerabilities in the application code.
 
     //The sourceCompatibility enforce that the gradle build must happen on jdk1.8
     sourceCompatibility = 1.8
     repositories {
 
         maven { 
-        url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
+           url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
             credentials {
                         username = "admin"
                         password = "Password1"
@@ -38,11 +37,9 @@ allprojects  {
 
 
     }
-
 }
 //The sponar plugin required to scan the application code and publish the report into the sonar dashboard.
-
-    apply plugin: 'org.sonarqube'
+apply plugin: 'org.sonarqube'
 
 apply plugin: 'maven-publish'
 apply plugin: 'war'
@@ -57,7 +54,6 @@ publishing{
         }
     }
 }
-
 
 subprojects {
     apply plugin: 'info.solidsoft.pitest'
