@@ -38,12 +38,13 @@ allprojects  {
 
 
     }
-}
-//The sponar plugin required to scan the application code and publish the report into the sonar dashboard.
-apply plugin: 'org.sonarqube'
+    apply plugin: 'org.sonarqube'
 
 apply plugin: 'maven-publish'
 apply plugin: 'war'
+}
+//The sponar plugin required to scan the application code and publish the report into the sonar dashboard.
+
 
 publishing{
     publications{
