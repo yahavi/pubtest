@@ -13,13 +13,12 @@ buildscript {
     repositories {
 
         maven { 
-        url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
-            credentials {
-                        username = "admin"
-                        password = "Password1"
-             }
-    }
-
+           url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
+                credentials {
+                            username = "admin"
+                            password = "Password1"
+                 }
+        }
 
     }
 
@@ -62,7 +61,7 @@ dependencies {
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-  //  compile project(':doedemodepend')
+    compile project(':doedemodepend')
     testCompile('io.cucumber:cucumber-java8:4.2.6')
     testCompile('io.cucumber:cucumber-junit:4.2.6')
     testCompile('io.cucumber:cucumber-spring:4.2.6')
@@ -85,4 +84,3 @@ task bddTest(type: Test) {
 }
 test.onlyIf {project.hasProperty("integrationTests")}
 bddTest.onlyIf {project.hasProperty("integrationTests")}
-
