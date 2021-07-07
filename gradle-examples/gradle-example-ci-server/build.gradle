@@ -42,9 +42,6 @@ allprojects  {
 
 apply plugin: 'maven-publish'
 apply plugin: 'war'
-}
-//The sponar plugin required to scan the application code and publish the report into the sonar dashboard.
-
 
 publishing{
     publications{
@@ -56,6 +53,11 @@ publishing{
         }
     }
 }
+}
+//The sponar plugin required to scan the application code and publish the report into the sonar dashboard.
+
+
+
 
 subprojects {
     apply plugin: 'info.solidsoft.pitest'
