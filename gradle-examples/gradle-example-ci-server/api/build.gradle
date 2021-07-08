@@ -44,9 +44,6 @@ publishing{
         mavenWeb(MavenPublication){
             from components.web
         }
-        mavenJava(MavenPublication){
-            from components.java
-        }
     }
 }
 //The dependencies block represents the application dependencies are required to compile and build the artifact.
@@ -86,9 +83,5 @@ bddTest.onlyIf {project.hasProperty("integrationTests")}
 
 
 war {
-enabled = true
-}
-
-jar {
 enabled = true
 }
