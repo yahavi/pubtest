@@ -20,7 +20,6 @@ buildscript {
 }
 allprojects  {
     group 'comtest'
-    //The java plugin requiredd for the java build
     apply plugin: 'java'
 
     //The sourceCompatibility enforce that the gradle build must happen on jdk1.8
@@ -38,7 +37,6 @@ allprojects  {
 
     }
 }
-//The sponar plugin required to scan the application code and publish the report into the sonar dashboard.
 apply plugin: 'org.sonarqube'
 
 apply plugin: 'maven-publish'
@@ -55,6 +53,7 @@ publishing{
     }
 }
 
+/*
 subprojects {
     apply plugin: 'info.solidsoft.pitest'
     pitest {
@@ -65,7 +64,7 @@ subprojects {
         outputFormats = ['XML', 'HTML']
         timestampedReports = false
     }
-}
+}*/
 
 jar {
     enabled = true
