@@ -53,6 +53,6 @@ publishing{
     }
 }
 
-jar {
+war {
     enabled = true
 }
