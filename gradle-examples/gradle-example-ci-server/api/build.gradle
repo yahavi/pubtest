@@ -34,23 +34,9 @@ publishing{
         }
     }
 }
-//The dependencies block represents the application dependencies are required to compile and build the artifact.
+
 dependencies {
-/*
-    compile('org.springframework.boot:spring-boot-starter-actuator')
-    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-    compile('org.springframework.boot:spring-boot-starter-web')
 
-    compile('com.fasterxml.jackson.core:jackson-annotations:2.9.6')
-    compile('com.fasterxml.jackson.core:jackson-core:2.9.6')
-    compile('com.fasterxml.jackson.core:jackson-databind:2.9.9')
-
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-    testCompile('io.cucumber:cucumber-java8:4.2.6')
-    testCompile('io.cucumber:cucumber-junit:4.2.6')
-    testCompile('io.cucumber:cucumber-spring:4.2.6')
-    */
 }
 
 war {
