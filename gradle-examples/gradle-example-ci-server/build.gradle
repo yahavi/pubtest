@@ -53,19 +53,6 @@ publishing{
     }
 }
 
-/*
-subprojects {
-    apply plugin: 'info.solidsoft.pitest'
-    pitest {
-        historyInputLocation = "./pithashfile.txt"
-        historyOutputLocation = "./pithashfile.txt"
-        //reportDir = "./target/pit-reports"
-        threads = 4
-        outputFormats = ['XML', 'HTML']
-        timestampedReports = false
-    }
-}*/
-
 jar {
     enabled = true
 }
