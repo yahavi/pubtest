@@ -84,6 +84,11 @@ task bddTest(type: Test) {
 test.onlyIf {project.hasProperty("integrationTests")}
 bddTest.onlyIf {project.hasProperty("integrationTests")}
 
+
+war {
+enabled = true
+}
+
 jar {
 enabled = true
 }
