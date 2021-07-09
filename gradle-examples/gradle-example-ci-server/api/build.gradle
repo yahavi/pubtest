@@ -29,9 +29,6 @@ publishing{
         mavenWeb(MavenPublication){
             from components.web
         }
-        mavenJava(MavenPublication){
-            from components.java
-        }
     }
 }
 
