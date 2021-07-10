@@ -39,7 +39,7 @@ allprojects  {
 }
 apply plugin: 'org.sonarqube'
 
-//apply plugin: 'maven-publish'
+apply plugin: 'maven-publish'
 apply plugin: 'war'
 
 publishing{
