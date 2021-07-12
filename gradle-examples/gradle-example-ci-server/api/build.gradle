@@ -1,15 +1,7 @@
 
 buildscript {
     repositories {
-
-        maven { 
-           url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
-            credentials {
-                        username = "admin"
-                        password = "Password1"
-             }
-    }
-
+        mavenCentral()
     }
 
     dependencies {
@@ -40,5 +32,9 @@ dependencies {
 }
 
 war {
-enabled = true
+    enabled = true
+}
+
+jar {
+    enabled = true
 }

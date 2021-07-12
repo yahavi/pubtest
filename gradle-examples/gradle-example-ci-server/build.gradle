@@ -2,15 +2,7 @@
 buildscript {
     //The repositories block specifies the location of artifactory to download the required dependencies
     repositories {
-
-        maven { 
-           url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
-            credentials {
-                        username = "admin"
-                        password = "Password1"
-             }
-    }
-
+        mavenCentral()
     }
     //The dependencies block represents the required plugins to be downloaded from the artifactory and adds into the project classpath.
     dependencies {
@@ -25,16 +17,7 @@ allprojects  {
     //The sourceCompatibility enforce that the gradle build must happen on jdk1.8
     sourceCompatibility = 1.8
     repositories {
-
-        maven { 
-           url 'http://172.16.2.42:8082/artifactory/a-gradle-release'
-            credentials {
-                        username = "admin"
-                        password = "Password1"
-             }
-    }
-
-
+        mavenCentral()
     }
 }
 apply plugin: 'org.sonarqube'
