@@ -22,6 +22,9 @@ publishing{
         mavenWeb(MavenPublication){
             from components.web
         }
+        mavenJava(MavenPublication){
+            from components.java
+        }
     }
 }
 
@@ -31,9 +34,5 @@ dependencies {
 }
 
 war {
-    enabled = true
-}
-
-jar {
     enabled = true
 }
